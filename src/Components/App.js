@@ -6,12 +6,25 @@ import Card from './Card';
 import recettes from '../recettes';
 // Admin
 import Admin from './Admin';
+// Database
+import Base from '../Base';
 
 class App extends React.Component {
 
     state = {
         recettes: {}
     };
+
+    componentWillMount() {
+        this.ref = Base.syncState( `${this.props.params.pseudo}/recettes`, {
+            context: this,
+            state: 'recettes'
+        } )
+    }
+
+    componentWillUnMount() {
+        Base.removeBinding(this.ref);
+    }
 
     chargerExemple = () => {
         this.setState({ recettes })
