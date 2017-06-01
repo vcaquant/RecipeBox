@@ -37,6 +37,12 @@ class App extends React.Component {
         this.setState({ recettes });
     };
 
+    majRecette = (key, majRecette) => {
+        const recettes = {...this.state.recettes};
+        recettes[key] = majRecette;
+        this.setState({ recettes })
+    };
+
     render() {
 
         const cards = Object
@@ -52,8 +58,10 @@ class App extends React.Component {
                     </div>
                 </div>
                 <Admin
+                    recettes={this.state.recettes}
                     chargerExemple={this.chargerExemple}
-                    ajouterRecette={this.ajouterRecette} />
+                    ajouterRecette={this.ajouterRecette}
+                    majRecette={this.majRecette} />
             </div>
         )
     }
